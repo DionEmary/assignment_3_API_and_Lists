@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import CallAPI from "../components/callAPI";
 
 export default function Lab5() {
-    const [monthValue, setMonthValue] = useState("");
-    const [dayValue, setDayValue] = useState("");
+    const [monthValue, setMonthValue] = useState<string>("");
+    const [dayValue, setDayValue] = useState<string>("");
+    const [combinedInputText, setCombinedInputText] = useState<string>("");
 
     const handleMonthChange = (text: string) => {
         setMonthValue(text);
@@ -14,7 +15,15 @@ export default function Lab5() {
         setDayValue(text);
     };
 
-    const combinedInputText = `${monthValue}/${dayValue}`;
+    useEffect(() => {
+        // This makes sure that the entered values are valid, Needs an update to make sure that the days are valid for the month
+
+        if(1 <= parseInt(monthValue) && parseInt(monthValue) <= 12 ) {
+            if(1 <= parseInt(dayValue) && parseInt(dayValue) <= 31) {
+                setCombinedInputText(`${monthValue}/${dayValue}`);
+            }
+        }
+    });
 
     return (
         <View style={styles.container}>
