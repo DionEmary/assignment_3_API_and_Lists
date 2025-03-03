@@ -14,7 +14,7 @@ export default function CallAPI({ inputText }: CallAPIProps) {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`https://numbersapi.p.rapidapi.com/${inputText}/trivia`, {
+                const response = await fetch(`https://numbersapi.p.rapidapi.com/${inputText}/date`, {
                     method: 'GET',
                     headers: {
                         'X-RapidAPI-Key': '129b06e546mshfa7f18a41310122p1c9777jsnf1abb959b6df',
