@@ -3,15 +3,16 @@ import { View, TextInput, StyleSheet } from "react-native";
 import CallAPI from "../components/callAPI";
 
 export default function Lab5() {
-    const [monthValue, setMonthValue] = useState<string>("");
-    const [dayValue, setDayValue] = useState<string>("");
-    const [combinedInputText, setCombinedInputText] = useState<string>("");
+    const [monthValue, setMonthValue] = useState("");
+    const [dayValue, setDayValue] = useState("");
+    const [combinedInputText, setCombinedInputText] = useState("");
 
-    const isValidDate= (month: number, day: number): boolean  => {
-        const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; 
+    const isValidDate = (month: number, day: number) => {
+        const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
+        // Leap year check (not necessary for this API, but good practice)
         const currentYear = new Date().getFullYear();
-        if (month === 2 && ((currentYear % 4 === 0 && currentYear % 100 !== 0) || currentYear % 400 === 0)) { 
+        if (month === 2 && (currentYear % 4 === 0 && (currentYear % 100 !== 0 || currentYear % 400 === 0))) {
             daysInMonth[1] = 29;
         }
 
@@ -20,31 +21,33 @@ export default function Lab5() {
 
     useEffect(() => {
         // This makes sure that the entered values are valid, Needs an update to make sure that the days are valid for the month
-
         const month = parseInt(monthValue);
         const day = parseInt(dayValue);
+
         if (!isNaN(month) && !isNaN(day) && isValidDate(month, day)) {
             setCombinedInputText(`${month}/${day}`);
         } else {
-            setCombinedInputText(""); // Reset if invalid date
+            setCombinedInputText("");
         }
-    }, [monthValue, dayValue]); // Ensures the effect only runs when these values change
+    }, [monthValue, dayValue]);
 
     return (
         <View style={styles.container}>
             <TextInput
                 style={styles.input}
                 placeholder="Enter a Month value"
+                keyboardType="numeric"
                 onChangeText={setMonthValue}
                 value={monthValue}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Enter a Day value"
+                keyboardType="numeric"
                 onChangeText={setDayValue}
                 value={dayValue}
             />
-            <CallAPI inputText={combinedInputText} />
+            {combinedInputText ? <CallAPI inputText={combinedInputText} /> : null}
         </View>
     );
 };
@@ -65,10 +68,4 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         width: '80%',
     },
-    list: {
-        marginTop: 30,
-    },
-    items: {
-        fontSize: 20,
-    }
 });
