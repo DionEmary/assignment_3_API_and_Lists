@@ -48,16 +48,21 @@ export default function CallAPI({ inputText }: CallAPIProps) {
 
     return (
         <View style={styles.container}>
-            {loading ? <Text>Loading...</Text> : error ? <Text>Error: {error}</Text> : <Text>{data}</Text>}
+            {loading ? <Text style={styles.output}>Loading...</Text> : error ? <Text style={styles.output}>Error: {error}</Text> : <Text style={styles.output}>{data}</Text>}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal: 20,
+        marginTop: 60,
+        height: 100,
     },
+    output: {
+        fontSize: 20,
+        textAlign: 'center',
+        height: 200,
+    }
 });

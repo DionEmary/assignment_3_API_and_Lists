@@ -1,14 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import CallAPI from "../components/callAPI";
+import DropDownPicker from "react-native-dropdown-picker";
 
 export default function Lab5() {
     const [monthValue, setMonthValue] = useState("");
     const [dayValue, setDayValue] = useState("");
     const [combinedInputText, setCombinedInputText] = useState("");
 
+    // Drop Down Menu Values
+    const [open, setOpen] = useState<boolean>(false);
+    const monthItems = [
+        { label: "January", value: "1" },
+        { label: "February", value: "2" },
+        { label: "March", value: "3" },
+        { label: "April", value: "4" },
+        { label: "May", value: "5" },
+        { label: "June", value: "6" },
+        { label: "July", value: "7" },
+        { label: "August", value: "8" },
+        { label: "September", value: "9" },
+        { label: "October", value: "10" },
+        { label: "November", value: "11" },
+        { label: "December", value: "12" },
+      ];
+
+    // Checks if the date is valid
     const isValidDate = (month: number, day: number) => {
-        const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // Valid dates for each month, January to December (Left to Right) 
+        // February accounts for leap years, so 29 days are valid
 
         return month >= 1 && month <= 12 && day >= 1 && day <= daysInMonth[month - 1];
     };
@@ -28,12 +48,14 @@ export default function Lab5() {
         <View style={styles.container}>
             {combinedInputText ? <CallAPI inputText={combinedInputText} /> : null}
             <View style={styles.inputContainer}>
-            <TextInput
-                style={styles.input}
-                placeholder="Enter a Month value"
-                keyboardType="numeric"
-                onChangeText={setMonthValue}
+            <DropDownPicker
+                open={open}
                 value={monthValue}
+                items={monthItems} // Using the static array
+                setOpen={setOpen}
+                setValue={setMonthValue}
+                placeholder="Select a Month"
+                style={styles.dropdown}
             />
             <TextInput
                 style={styles.input}
@@ -63,9 +85,20 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         paddingHorizontal: 10,
         width: '80%',
+        borderRadius: 7,
     },
     inputContainer: {
-        width: '100%',
         alignItems: 'center',
+        width: '100%',
     },
+    dropdown: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginBottom: 20,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        paddingHorizontal: 10,
+        width: '80%',
+    }
 });
