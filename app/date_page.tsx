@@ -14,7 +14,6 @@ export default function Lab5() {
     };
 
     useEffect(() => {
-        // This makes sure that the entered values are valid, Needs an update to make sure that the days are valid for the month
         const month = parseInt(monthValue);
         const day = parseInt(dayValue);
 
