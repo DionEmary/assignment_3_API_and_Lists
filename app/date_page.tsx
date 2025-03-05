@@ -76,18 +76,18 @@ export default function Lab5() {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 20,
+        paddingTop: 30,
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
     },
     input: {
         height: 40,
         borderColor: 'gray',
         borderWidth: 1,
-        marginBottom: 20,
+        marginBottom: 30,
         paddingHorizontal: 10,
         width: '80%',
         borderRadius: 7,
