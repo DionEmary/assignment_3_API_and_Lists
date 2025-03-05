@@ -23,7 +23,7 @@ export default function CallAPI({ inputText }: CallAPIProps) {
             const apiOptions = {
                 method: 'GET',
                 headers: {
-                    'X-RapidAPI-Key': 'YOUR_API_KEY_HERE', // Ensure to replace this with your actual API key
+                    'X-RapidAPI-Key': '129b06e546mshfa7f18a41310122p1c9777jsnf1abb959b6df', // Ensure to replace this with your actual API key
                     'X-RapidAPI-Host': 'numbersapi.p.rapidapi.com'
                 }
             };
@@ -58,5 +58,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        marginHorizontal: 20,
     },
 });

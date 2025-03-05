@@ -26,6 +26,8 @@ export default function Lab5() {
 
     return (
         <View style={styles.container}>
+            {combinedInputText ? <CallAPI inputText={combinedInputText} /> : null}
+            <View style={styles.inputContainer}>
             <TextInput
                 style={styles.input}
                 placeholder="Enter a Month value"
@@ -39,19 +41,20 @@ export default function Lab5() {
                 keyboardType="numeric"
                 onChangeText={setDayValue}
                 value={dayValue}
-            />
-            {combinedInputText ? <CallAPI inputText={combinedInputText} /> : null}
+            /> 
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 100,
+        paddingTop: 20,
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 20
     },
     input: {
         height: 40,
@@ -60,5 +63,9 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         paddingHorizontal: 10,
         width: '80%',
+    },
+    inputContainer: {
+        width: '100%',
+        alignItems: 'center',
     },
 });

@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <View>
             <Link style={styles.link} href="/date_page">
-                Find Dates Trivia
+                Dates Trivia page
             </Link>
         </View>
     );
@@ -26,6 +26,7 @@ export default function Home() {
             fontSize: 20,
             color: 'blue',
             marginTop: 30,
+            marginLeft: 10,
             textDecorationLine: 'underline',
         }
     })
