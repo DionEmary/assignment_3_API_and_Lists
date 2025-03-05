@@ -10,12 +10,6 @@ export default function Lab5() {
     const isValidDate = (month: number, day: number) => {
         const daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-        // Leap year check (not necessary for this API, but good practice)
-        const currentYear = new Date().getFullYear();
-        if (month === 2 && (currentYear % 4 === 0 && (currentYear % 100 !== 0 || currentYear % 400 === 0))) {
-            daysInMonth[1] = 29;
-        }
-
         return month >= 1 && month <= 12 && day >= 1 && day <= daysInMonth[month - 1];
     };
 
