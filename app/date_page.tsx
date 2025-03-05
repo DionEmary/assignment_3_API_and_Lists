@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import CallAPI from "../components/callAPI";
 import DropDownPicker from "react-native-dropdown-picker";
+import { FontAwesome } from "@expo/vector-icons"; // Used for drop down icon
 
 export default function Lab5() {
     const [monthValue, setMonthValue] = useState("");
@@ -30,7 +31,7 @@ export default function Lab5() {
         const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // Valid dates for each month, January to December (Left to Right) 
         // February accounts for leap years, so 29 days are valid
 
-        return month >= 1 && month <= 12 && day >= 1 && day <= daysInMonth[month - 1];
+        return day >= 1 && day <= daysInMonth[month - 1];
     };
 
     useEffect(() => {
@@ -48,6 +49,13 @@ export default function Lab5() {
         <View style={styles.container}>
             {combinedInputText ? <CallAPI inputText={combinedInputText} /> : null}
             <View style={styles.inputContainer}>
+            <TextInput
+                style={styles.input}
+                placeholder="Enter a Day value"
+                keyboardType="numeric"
+                onChangeText={setDayValue}
+                value={dayValue}
+            /> 
             <DropDownPicker
                 open={open}
                 value={monthValue}
@@ -56,14 +64,11 @@ export default function Lab5() {
                 setValue={setMonthValue}
                 placeholder="Select a Month"
                 style={styles.dropdown}
+                dropDownContainerStyle={styles.dropdownContainer}
+                ArrowDownIconComponent={() => (
+                    <FontAwesome name="caret-down" size={20} color="gray" />
+                )}
             />
-            <TextInput
-                style={styles.input}
-                placeholder="Enter a Day value"
-                keyboardType="numeric"
-                onChangeText={setDayValue}
-                value={dayValue}
-            /> 
             </View>
         </View>
     );
@@ -100,5 +105,11 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
         paddingHorizontal: 10,
         width: '80%',
-    }
+    },
+    dropdownContainer: {
+        width: '80%',
+        alignSelf: 'center',
+        borderColor: 'gray',
+        borderWidth: 1,
+    },
 });
